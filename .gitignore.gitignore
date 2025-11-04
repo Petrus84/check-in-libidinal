@@ -1,0 +1,30 @@
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (caso adicione no futuro)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Arquivos de build (caso adicione no futuro)
+dist/
+build/
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# Arquivos de ambiente (caso adicione no futuro)
+.env
+.env.local
+
+# Netlify
+.netlify/

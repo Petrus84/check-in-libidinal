@@ -1,0 +1,22 @@
+[build]
+  # Não precisa de build, é HTML estático
+  publish = "."
+  
+[build.environment]
+  # Não precisa de variáveis de ambiente
+
+[[redirects]]
+  # Redireciona 404 para index.html (útil se adicionar rotas no futuro)
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  # Headers de segurança
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;"

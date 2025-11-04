@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in Libidinal V2.0 ENHANCED - SAGE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --gold: #D4AF37;
+            --navy: #2C3E50;
+            --teal: #40E0D0;
+            --white: #FAFAFA;
+            --red: #e74c3c;
+            --orange: #e67e22;
+            --green: #27ae60;
+            --purple: #9b59b6;
+            --blue: #3498db;
+            --shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--navy);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--white);
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, #34495e 100%);
+            padding: 50px 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        
+        .version-badge {
+            background: var(--teal);
+            color: var(--navy);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            margin-left: 12px;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--gold);
+        }
+        
+        .section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--teal);
+        }
+        
+        .question-card h3 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .question-card p {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .option-card {
+            padding: 18px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .option-card:hover {
+            border-color: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .option-card.selected {
+            border-color: var(--teal);
+            background: rgba(64, 224, 208, 0.1);
+        }
+        
+        .option-code {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+        
+        .option-label {
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn:hover {
+            background: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--navy);
+            color: white;
+        }
+        
+        .urgencia-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            min-height: 100px;
+        }
+        
+        .urgencia-input:focus {
+            outline: none;
+            border-color: var(--teal);
+        }
+        
+        .resultado-card {
+            background: linear-gradient(135deg, rgba(64, 224, 208, 0.1) 0%, white 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 6px solid var(--teal);
+            margin: 20px 0;
+        }
+        
+        .perfil-badge {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .diagnostico-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .diagnostico-item {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 3px solid var(--blue);
+        }
+        
+        .diagnostico-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .diagnostico-valor {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .recomendacao-box {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--green);
+            margin: 20px 0;
+        }
+        
+        .recomendacao-box h4 {
+            color: #155724;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .alert-box {
+            background: rgba(231, 76, 60, 0.08);
+            border: 2px solid var(--red);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .alert-box h4 {
+            color: var(--red);
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .trend-card {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--blue);
+            margin: 20px 0;
+        }
+        
+        .trend-card h4 {
+            color: var(--blue);
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .score-breakdown {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--teal) 0%, var(--gold) 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <i class="fas fa-brain"></i> Check-in Libidinal
+                <span class="version-badge">V2.0 ENHANCED</span>
+            </h1>
+            <div class="tagline">Diagnóstico Energético Avançado | Sistema de Scoring + Análise Temporal</div>
+        </header>
+
+        <!-- TELA INICIAL -->
+        <div id="tela-inicial" class="section">
+            <h2>📋 Check-in Neuropsicanalítico Avançado</h2>
+            <div class="question-card">
+                <h3>Versão 2.0 ENHANCED - Novos Recursos</h3>
+                <p style="line-height: 1.8;">
+                    Este check-in mapeia <strong>6 dimensões neuropsicanalíticas</strong> com análise aprofundada:
+                </p>
+                <ul style="margin: 15px 0 15px 20px; line-height: 1.8; font-size: 14px;">
+                    <li><strong>Foco Energético Primário (FEP)</strong> - Investimento libidinal dominante</li>
+                    <li><strong>Qualidade da Energia (QE)</strong> - Autêntica vs compensatória</li>
+                    <li><strong>Resistências Ativas (RA)</strong> - Defesas em operação</li>
+                    <li><strong>Impulso Dominante (ID)</strong> - Direção da pulsão</li>
+                    <li><strong>Estado Neuropsicanalítico (ENP)</strong> - SEEK, Flow, ou Compensação</li>
+                    <li><strong>Urgência Libidinal (UL)</strong> - O que o inconsciente quer AGORA</li>
+                </ul>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--blue);">
+                    <strong style="color: var(--blue);">✨ NOVIDADES V2.0 ENHANCED:</strong>
+                    <ul style="margin: 10px 0 0 20px; line-height: 1.8; font-size: 14px;">
+                        <li><strong>Sistema de Scoring:</strong> Perfis detectados por pontuação, não apenas match exato</li>
+                        <li><strong>Escalas Integradas:</strong> Corpo/Mente/Atenção influenciam o perfil final</li>
+                        <li><strong>Análise Textual UL:</strong> Detecção de palavras-chave na urgência libidinal</li>
+                        <li><strong>Trends Históricos:</strong> Compara últimos 7 check-ins para padrões</li>
+                        <li><strong>Integração SAGE 90:</strong> Cruza com IFE, IDS, IIE automaticamente</li>
+                    </ul>
+                </div>
+                
+                <p style="color: #7f8c8d; margin-top: 15px; font-size: 13px;">
+                    ⏱️ Tempo estimado: 6-8 minutos | Dados salvos na sessão atual
+                </p>
+            </div>
+            <button class="btn" onclick="iniciarCheckin()">
+                <i class="fas fa-play"></i> Iniciar Check-in Completo
+            </button>
+        </div>
+
+        <!-- DIAGNÓSTICO -->
+        <div id="diagnostico" class="hidden">
+            <div class="section">
+                <h2>Diagnóstico Multidimensional</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-bar" style="width: 0%"></div>
+                </div>
+                <p style="text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 25px;">
+                    <span id="progress-text">Pergunta 1 de 9</span>
+                </p>
+
+                <!-- Q1: Foco Energético Primário -->
+                <div class="question-card" id="q1">
+                    <h3>1. Foco Energético Primário (FEP)</h3>
+                    <p>Onde sua energia está mais NATURALMENTE investida agora?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('fep', 'V1')">
+                            <div class="option-code">V1</div>
+                            <div class="option-label">Intelectual/Analítica<br><small>Pensar, analisar, compreender</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('fep', 'V2')">
+                            <div class="option-code">V2</div>
+                            <div class="option-label">Criativa/Expressiva<br><small>Criar, expressar, imaginar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('fep', 'V3')">
+                            <div class="option-code">V3</div>
+                            <div class="option-label">Executiva/Realizadora<br><small>Fazer, executar, completar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('fep', 'V4')">
+                            <div class="option-code">V4</div>
+                            <div class="option-label">Relacional/Social<br><small>Conectar, compartilhar, colaborar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('fep', 'V5')">
+                            <div class="option-code">V5</div>
+                            <div class="option-label">Competitiva/Conquistadora<br><small>Competir, vencer, conquistar</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: Qualidade da Energia -->
+                <div class="question-card hidden" id="q2">
+                    <h3>2. Qualidade da Energia (QE)</h3>
+                    <p>Como você descreveria a QUALIDADE (não quantidade) da sua energia?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('qe', 'W1')">
+                            <div class="option-code">W1</div>
+                            <div class="option-label">Fluida e Focada<br><small>Flui naturalmente, direcionada</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('qe', 'W2')">
+                            <div class="option-code">W2</div>
+                            <div class="option-label">Intensa mas Dispersa<br><small>Alta mas desorganizada</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('qe', 'W3')">
+                            <div class="option-code">W3</div>
+                            <div class="option-label">Contida e Estratégica<br><small>Controlada, planejada</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('qe', 'W4')">
+                            <div class="option-code">W4</div>
+                            <div class="option-label">Fragmentada e Ansiosa<br><small>Picotada, ansiosa</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('qe', 'W5')">
+                            <div class="option-code">W5</div>
+                            <div class="option-label">Baixa mas Estável<br><small>Pouca, mas consistente</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3: Resistências Ativas -->
+                <div class="question-card hidden" id="q3">
+                    <h3>3. Resistências Ativas (RA)</h3>
+                    <p>Qual é seu PRINCIPAL obstáculo interno agora?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('ra', 'X1')">
+                            <div class="option-code">X1</div>
+                            <div class="option-label">Hiperanálise<br><small>Penso demais, não ajo</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('ra', 'X2')">
+                            <div class="option-code">X2</div>
+                            <div class="option-label">Múltiplos Projetos<br><small>Dispersão, não termino nada</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('ra', 'X3')">
+                            <div class="option-code">X3</div>
+                            <div class="option-label">Expectativas Externas<br><small>Vivo para agradar outros</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('ra', 'X4')">
+                            <div class="option-code">X4</div>
+                            <div class="option-label">Autossabotagem<br><small>Me saboto quando perto do sucesso</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('ra', 'X5')">
+                            <div class="option-code">X5</div>
+                            <div class="option-label">Falta de Clareza<br><small>Não sei o que quero</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: Impulso Dominante -->
+                <div class="question-card hidden" id="q4">
+                    <h3>4. Impulso Dominante (ID)</h3>
+                    <p>Se você pudesse fazer APENAS uma coisa hoje, seria:</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('id', 'Y1')">
+                            <div class="option-code">Y1</div>
+                            <div class="option-label">Sistematizar<br><small>Organizar, estruturar, otimizar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('id', 'Y2')">
+                            <div class="option-code">Y2</div>
+                            <div class="option-label">Experimentar<br><small>Testar, explorar, descobrir</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('id', 'Y3')">
+                            <div class="option-code">Y3</div>
+                            <div class="option-label">Comunicar<br><small>Falar, escrever, compartilhar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('id', 'Y4')">
+                            <div class="option-code">Y4</div>
+                            <div class="option-label">Construir<br><small>Produzir, criar algo tangível</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('id', 'Y5')">
+                            <div class="option-code">Y5</div>
+                            <div class="option-label">Conectar<br><small>Relacionar, colaborar, trocar</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q5: Estado Neuropsicanalítico -->
+                <div class="question-card hidden" id="q5">
+                    <h3>5. Estado Neuropsicanalítico (ENP)</h3>
+                    <p>Como você descreveria seu estado mental/emocional predominante?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('enp', 'Z1')">
+                            <div class="option-code">Z1</div>
+                            <div class="option-label">SEEK Hiperativo<br><small>Muitas ideias, excitado, inquieto</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('enp', 'Z2')">
+                            <div class="option-code">Z2</div>
+                            <div class="option-label">Modo Compensatório<br><small>Forçando produtividade</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('enp', 'Z3')">
+                            <div class="option-code">Z3</div>
+                            <div class="option-label">Integração Produtiva<br><small>Equilibrado, integrado</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('enp', 'Z4')">
+                            <div class="option-code">Z4</div>
+                            <div class="option-label">Padrão de Evitação<br><small>Procrastinando, fugindo</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('enp', 'Z5')">
+                            <div class="option-code">Z5</div>
+                            <div class="option-label">Flow State Acessível<br><small>No flow ou perto dele</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q6: Urgência Libidinal -->
+                <div class="question-card hidden" id="q6">
+                    <h3>6. Urgência Libidinal (UL)</h3>
+                    <p>O que seu INCONSCIENTE mais quer fazer AGORA? (Seja honesto, não o que "deveria")</p>
+                    <textarea class="urgencia-input" id="urgencia-input" rows="4" 
+                              placeholder="Ex: Documentar a metodologia SAGE de forma estruturada, Reorganizar meu ambiente de trabalho, Conversar com alguém sobre minhas ideias, Finalizar aquele projeto que comecei..."></textarea>
+                    <p style="font-size: 12px; color: #7f8c8d; margin-top: 8px;">
+                        💡 Dica: Quanto mais específico, melhor a análise textual
+                    </p>
+                </div>
+
+                <!-- Q7-9: Escalas Básicas -->
+                <div class="question-card hidden" id="q7">
+                    <h3>7. Energia Física (Corpo)</h3>
+                    <p>Como está sua energia corporal neste momento?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('corpo', 1)">
+                            <div class="option-code">1</div>
+                            <div class="option-label">Baixa<br><small>Exausto, sem energia</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('corpo', 2)">
+                            <div class="option-code">2</div>
+                            <div class="option-label">Média<br><small>Cansado mas funcional</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('corpo', 3)">
+                            <div class="option-code">3</div>
+                            <div class="option-label">Alta<br><small>Disposto, ativo</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('corpo', 4)">
+                            <div class="option-code">4</div>
+                            <div class="option-label">Muito Alta<br><small>Energia de sobra</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card hidden" id="q8">
+                    <h3>8. Fluxo de Pensamentos (Mente)</h3>
+                    <p>Como está o ritmo dos seus pensamentos?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('mente', 1)">
+                            <div class="option-code">1</div>
+                            <div class="option-label">Lentos<br><small>Dificuldade de pensar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('mente', 2)">
+                            <div class="option-code">2</div>
+                            <div class="option-label">Normal<br><small>Fluxo equilibrado</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('mente', 3)">
+                            <div class="option-code">3</div>
+                            <div class="option-label">Acelerados<br><small>Muitas ideias</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('mente', 4)">
+                            <div class="option-code">4</div>
+                            <div class="option-label">Caóticos<br><small>Descontrolados</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card hidden" id="q9">
+                    <h3>9. Qualidade de Atenção</h3>
+                    <p>Como está sua capacidade de foco?</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selecionar('atencao', 1)">
+                            <div class="option-code">1</div>
+                            <div class="option-label">Disperso<br><small>Não consigo focar</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('atencao', 2)">
+                            <div class="option-code">2</div>
+                            <div class="option-label">Focado<br><small>Atenção adequada</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('atencao', 3)">
+                            <div class="option-code">3</div>
+                            <div class="option-label">Hiperfoco<br><small>Concentração intensa</small></div>
+                        </div>
+                        <div class="option-card" onclick="selecionar('atencao', 4)">
+                            <div class="option-code">4</div>
+                            <div class="option-label">Flutuante<br><small>Foco oscilante</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn" id="btn-proximo" onclick="proximaPergunta()" style="margin-top: 20px;">
+                    Próxima <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div id="resultado" class="hidden">
+            <div class="section">
+                <h2>📊 Diagnóstico Completo</h2>
+                
+                <div class="resultado-card">
+                    <h3 style="color: var(--navy); margin-bottom: 15px;">
+                        <i class="fas fa-user-md"></i> Perfil Energético Detectado
+                    </h3>
+                    <div class="perfil-badge" id="perfil-display"></div>
+                    <p style="margin: 15px 0; line-height: 1.8;" id="perfil-descricao"></p>
+                    
+                    <div class="score-breakdown" id="score-breakdown"></div>
+                </div>
+
+                <h3 style="color: var(--navy); margin: 25px 0 15px 0; font-size: 20px;">
+                    <i class="fas fa-chart-bar"></i> Dimensões Mapeadas
+                </h3>
+                <div class="diagnostico-grid" id="dimensoes-display"></div>
+
+                <div id="analise-ul-container"></div>
+                <div id="integracao-sage-container"></div>
+                <div id="trends-container"></div>
+                <div id="recomendacoes-container"></div>
+                <div id="alertas-container"></div>
+
+                <div style="margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn" onclick="exportarJSON()">
+                        <i class="fas fa-download"></i> Exportar JSON
+                    </button>
+                    <button class="btn btn-secondary" onclick="novoCheckin()">
+                        <i class="fas fa-redo"></i> Novo Check-in
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Armazenamento em memória (substituindo localStorage)
+        const sessionData = {
+            checkins: [],
+            sageProfile: null
+        };
+        
+        let checkinData = {
+            fep: null,
+            qe: null,
+            ra: null,
+            id: null,
+            enp: null,
+            ul: '',
+            corpo: null,
+            mente: null,
+            atencao: null,
+            timestamp: null,
+            perfil: null,
+            scores: {},
+            analiseTextual: {},
+            integracaoSage: {}
+        };
+
+        let perguntaAtual = 1;
+        const totalPerguntas = 9;
+
+        function iniciarCheckin() {
+            document.getElementById('tela-inicial').classList.add('hidden');
+            document.getElementById('diagnostico').classList.remove('hidden');
+            atualizarProgresso();
+        }
+
+        function selecionar(campo, valor) {
+            checkinData[campo] = valor;
+            
+            const container = document.getElementById(`q${perguntaAtual}`);
+            const options = container.querySelectorAll('.option-card');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            event.currentTarget.classList.add('selected');
+            
+            setTimeout(() => proximaPergunta(), 300);
+        }
+
+        function proximaPergunta() {
+            if (perguntaAtual === 6) {
+                const ul = document.getElementById('urgencia-input').value.trim();
+                if (ul.length < 20) {
+                    alert('Por favor, descreva sua urgência libidinal com mais detalhes (mínimo 20 caracteres)');
+                    return;
+                }
+                checkinData.ul = ul;
+            }
+            
+            document.getElementById(`q${perguntaAtual}`).classList.add('hidden');
+            perguntaAtual++;
+            
+            if (perguntaAtual <= totalPerguntas) {
+                document.getElementById(`q${perguntaAtual}`).classList.remove('hidden');
+                atualizarProgresso();
+                
+                if (perguntaAtual === totalPerguntas) {
+                    document.getElementById('btn-proximo').innerHTML = 
+                        'Gerar Diagnóstico <i class="fas fa-check"></i>';
+                    document.getElementById('btn-proximo').onclick = gerarDiagnostico;
+                }
+            }
+        }
+
+        function atualizarProgresso() {
+            const progresso = (perguntaAtual / totalPerguntas) * 100;
+            document.getElementById('progress-bar').style.width = progresso + '%';
+            document.getElementById('progress-text').textContent = 
+                `Pergunta ${perguntaAtual} de ${totalPerguntas}`;
+        }
+
+        function gerarDiagnostico() {
+            checkinData.timestamp = new Date().toISOString();
+            checkinData.analiseTextual = analisarTextoUL(checkinData.ul);
+            checkinData.integracaoSage = integrarComSAGE90();
+            const perfil = diagnosticarPerfilComScoring();
+            checkinData.perfil = perfil;
+            const trends = analisarTrends();
+            checkinData.trends = trends;
+            
+            // Salvar na sessão
+            sessionData.checkins.push({...checkinData});
+            
+            mostrarResultado(perfil, trends);
+        }
+
+        function diagnosticarPerfilComScoring() {
+            const { fep, qe, ra, id, enp, corpo, mente, atencao } = checkinData;
+            
+            const perfis = [
+                {
+                    nome: 'EXPERIMENTADOR EM FLOW DISPERSO',
+                    criterios: {
+                        fep: ['V1', 'V2'],
+                        qe: ['W2'],
+                        ra: ['X2'],
+                        enp: ['Z5', 'Z1'],
+                        corpo: [3, 4],
+                        mente: [3, 4]
+                    },
+                    pesos: { fep: 2, qe: 3, ra: 3, enp: 2, corpo: 1, mente: 1 },
+                    cor: '#9b59b6',
+                    descricao: 'Energia intelectual/criativa alta + Flow State acessível, mas dispersão por múltiplos projetos. Padrão TDAH criativo em estado positivo.',
+                    forcas: ['Flow State acessível', 'Alta capacidade intelectual/criativa', 'Impulso experimental forte'],
+                    tensao: 'Energia alta + Dispersão = Risco de paralisia por excesso de opções',
+                    recomendacao: 'CANALIZAÇÃO IMEDIATA da urgência libidinal. Escolher UMA prioridade e proteger foco por 60-90 minutos.',
+                    alerta: 'Risco de iniciar múltiplos projetos sem concluir nenhum'
+                },
+                {
+                    nome: 'MODO COMPENSATÓRIO ATIVO',
+                    criterios: {
+                        enp: ['Z2'],
+                        qe: ['W3'],
+                        ra: ['X3'],
+                        corpo: [2, 3]
+                    },
+                    pesos: { enp: 4, qe: 2, ra: 3, corpo: 1 },
+                    cor: '#e74c3c',
+                    descricao: 'Produtividade forçada. Cliente está em "Falso Self" - trabalhando por expectativas externas, não por desejo autêntico.',
+                    forcas: ['Disciplina ativa', 'Controle presente'],
+                    tensao: 'Energia gasta em compensação, não em realização autêntica. Risco de burnout.',
+                    recomendacao: 'CRÍTICO: Pausar e perguntar "estou fazendo isso POR MIM ou PARA os outros?" Considerar se essa tarefa é realmente prioritária.',
+                    alerta: 'Alto risco de exaustão e ressentimento. Considerar sessão terapêutica para trabalhar expectativas internalizadas.'
+                },
+                {
+                    nome: 'ESTADO IDEAL - FLOW AUTÊNTICO',
+                    criterios: {
+                        enp: ['Z5'],
+                        qe: ['W1'],
+                        corpo: [3, 4],
+                        atencao: [2, 3]
+                    },
+                    pesos: { enp: 3, qe: 3, corpo: 2, atencao: 2 },
+                    cor: '#27ae60',
+                    descricao: 'Energia fluida e focada + Flow State. Cliente está em self autêntico, sistemas integrados.',
+                    forcas: ['Flow acessível', 'Energia autêntica', 'Integração self'],
+                    tensao: 'Nenhuma tensão significativa',
+                    recomendacao: 'APROVEITAR esta janela neurológica rara! Executar tarefa de maior valor/complexidade. Minimizar interrupções.',
+                    alerta: 'Estado raro - proteger a qualquer custo'
+                },
+                {
+                    nome: 'PADRÃO DE EVITAÇÃO/AUTOSSABOTAGEM',
+                    criterios: {
+                        enp: ['Z4'],
+                        ra: ['X4'],
+                        corpo: [1, 2]
+                    },
+                    pesos: { enp: 4, ra: 4, corpo: 1 },
+                    cor: '#e74c3c',
+                    descricao: 'Cliente está ativamente evitando ou sabotando progresso. Possível ferida narcísica ou conflito inconsciente.',
+                    forcas: ['Consciência da resistência (já é 50% do trabalho)'],
+                    tensao: 'Defesas ativas bloqueando ação',
+                    recomendacao: 'NÃO forçar produtividade. Trabalhar a resistência ANTES da tarefa. Perguntar: "Do que tenho medo se isso der certo?"',
+                    alerta: 'CRÍTICO: Forçar ação pode reforçar autossabotagem. Considerar sessão terapêutica focal.'
+                },
+                {
+                    nome: 'HIPOATIVAÇÃO SEVERA',
+                    criterios: {
+                        corpo: [1],
+                        mente: [1, 2],
+                        enp: ['Z4']
+                    },
+                    pesos: { corpo: 3, mente: 3, enp: 2 },
+                    cor: '#3498db',
+                    descricao: 'Energia física e mental baixas. Sistema subcortical em modo conservação.',
+                    forcas: ['Clareza sobre limitação'],
+                    tensao: 'Recursos energéticos limitados',
+                    recomendacao: 'Tarefas MICRO (5-10 min). Priorizar regulação (movimento leve, hidratação, luz natural) antes de produtividade.',
+                    alerta: 'Evitar decisões importantes ou tarefas complexas'
+                },
+                {
+                    nome: 'ENERGIA DISPERSA - ALTA ATIVAÇÃO',
+                    criterios: {
+                        qe: ['W2', 'W4'],
+                        ra: ['X2'],
+                        mente: [3, 4]
+                    },
+                    pesos: { qe: 3, ra: 3, mente: 2 },
+                    cor: '#e67e22',
+                    descricao: 'Energia intensa mas desorganizada. Múltiplos projetos fragmentam a atenção.',
+                    forcas: ['Alta energia disponível', 'Motivação presente'],
+                    tensao: 'Dispersão impede conversão de energia em resultado',
+                    recomendacao: 'Técnica do "Único Foco": Escolher 1 tarefa e proteger por 25 minutos (Pomodoro). Anotar outras ideias para depois.',
+                    alerta: 'Evitar iniciar novos projetos hoje'
+                }
+            ];
+
+            const scores = perfis.map(perfil => {
+                let score = 0;
+                let maxScore = 0;
+
+                for (const [dimensao, valores] of Object.entries(perfil.criterios)) {
+                    const peso = perfil.pesos[dimensao] || 1;
+                    maxScore += peso;
+                    
+                    if (valores.includes(checkinData[dimensao])) {
+                        score += peso;
+                    }
+                }
+
+                return {
+                    ...perfil,
+                    score: score,
+                    maxScore: maxScore,
+                    percentual: (score / maxScore) * 100
+                };
+            });
+
+            scores.sort((a, b) => b.percentual - a.percentual);
+
+            checkinData.scores = scores.map(s => ({
+                nome: s.nome,
+                percentual: s.percentual.toFixed(1)
+            }));
+
+            if (scores[0].percentual >= 50) {
+                return scores[0];
+            }
+
+            return {
+                nome: 'PERFIL MISTO - ANÁLISE INDIVIDUALIZADA',
+                cor: '#2C3E50',
+                descricao: `Combinação única de variáveis. Top matches: ${scores.slice(0, 2).map(s => s.nome).join(' + ')}`,
+                forcas: ['Perfil único', 'Múltiplas dimensões ativas'],
+                tensao: 'Padrão não mapeado nos perfis clássicos',
+                recomendacao: 'Focar na urgência libidinal declarada. Monitorar padrões ao longo de múltiplos check-ins.',
+                alerta: 'Dados insuficientes para diagnóstico estrutural',
+                scores: scores.slice(0, 3)
+            };
+        }
+
+        function analisarTextoUL(texto) {
+            const palavrasChave = {
+                sistematizar: ['documentar', 'organizar', 'estruturar', 'sistematizar', 'mapear', 'categorizar'],
+                criar: ['criar', 'desenvolver', 'produzir', 'construir', 'elaborar', 'fazer'],
+                explorar: ['explorar', 'experimentar', 'testar', 'descobrir', 'investigar', 'pesquisar'],
+                comunicar: ['escrever', 'falar', 'compartilhar', 'comunicar', 'expressar', 'conversar'],
+                conectar: ['conectar', 'colaborar', 'trocar', 'relacionar', 'interagir'],
+                completar: ['terminar', 'finalizar', 'concluir', 'completar', 'encerrar'],
+                fugir: ['evitar', 'fugir', 'procrastinar', 'adiar', 'escapar']
+            };
+
+            const analise = {
+                categorias: {},
+                intensidade: 0,
+                especificidade: 0
+            };
+
+            const textoLower = texto.toLowerCase();
+
+            for (const [categoria, palavras] of Object.entries(palavrasChave)) {
+                const matches = palavras.filter(p => textoLower.includes(p));
+                if (matches.length > 0) {
+                    analise.categorias[categoria] = matches.length;
+                }
+            }
+
+            analise.intensidade = Math.min(5, Math.floor(texto.length / 50));
+            const palavras = texto.split(/\s+/).filter(p => p.length > 3);
+            analise.especificidade = Math.min(5, Math.floor(palavras.length / 5));
+
+            return analise;
+        }
+
+        function integrarComSAGE90() {
+            const sage = sessionData.sageProfile;
+            
+            if (!sage) {
+                return { disponivel: false };
+            }
+
+            const integracao = {
+                disponivel: true,
+                ife: sage.ife,
+                ids: sage.ids,
+                iie: sage.iie,
+                ica: sage.ica,
+                gaf: sage.gaf,
+                insights: []
+            };
+
+            if (sage.ife > 1.5 && checkinData.ra === 'X2') {
+                integracao.insights.push({
+                    tipo: 'DISPERSÃO ESTRUTURAL',
+                    mensagem: `IFE alto (${sage.ife.toFixed(2)}) + Resistência X2 = Dispersão é DEFESA, não sintoma`
+                });
+            }
+
+            if (sage.ids >= 5 && checkinData.enp === 'Z4') {
+                integracao.insights.push({
+                    tipo: 'DESREGULAÇÃO CRÍTICA',
+                    mensagem: `IDS ${sage.ids} + Evitação Z4 = Sistema em colapso. Regulação URGENTE antes de ação.`
+                });
+            }
+
+            if (sage.ica > 1.5 && checkinData.ra === 'X3') {
+                integracao.insights.push({
+                    tipo: 'CONFLITO AXIOLÓGICO',
+                    mensagem: `ICA ${sage.ica.toFixed(2)} + Expectativas Externas = Falso Self ativo. Trabalhar autenticidade.`
+                });
+            }
+
+            return integracao;
+        }
+
+        function analisarTrends() {
+            const checkins = sessionData.checkins.slice(-7);
+
+            if (checkins.length < 2) {
+                return { disponivel: false };
+            }
+
+            const trends = {
+                disponivel: true,
+                total: checkins.length,
+                padroes: []
+            };
+
+            const perfis = {};
+            checkins.forEach(c => {
+                if (c.perfil && c.perfil.nome) {
+                    perfis[c.perfil.nome] = (perfis[c.perfil.nome] || 0) + 1;
+                }
+            });
+
+            const perfilDominante = Object.entries(perfis).sort((a, b) => b[1] - a[1])[0];
+            if (perfilDominante && perfilDominante[1] >= 3) {
+                trends.padroes.push({
+                    tipo: 'PERFIL RECORRENTE',
+                    mensagem: `"${perfilDominante[0]}" aparece em ${perfilDominante[1]} dos últimos ${checkins.length} check-ins`,
+                    interpretacao: 'Padrão estrutural detectado - este é seu modo de operação dominante'
+                });
+            }
+
+            const resistencias = {};
+            checkins.forEach(c => {
+                if (c.ra) {
+                    resistencias[c.ra] = (resistencias[c.ra] || 0) + 1;
+                }
+            });
+
+            const resistDominante = Object.entries(resistencias).sort((a, b) => b[1] - a[1])[0];
+            if (resistDominante && resistDominante[1] >= 4) {
+                const nomeResist = {
+                    'X1': 'Hiperanálise',
+                    'X2': 'Múltiplos Projetos',
+                    'X3': 'Expectativas Externas',
+                    'X4': 'Autossabotagem',
+                    'X5': 'Falta de Clareza'
+                };
+                
+                trends.padroes.push({
+                    tipo: 'RESISTÊNCIA CRÔNICA',
+                    mensagem: `${nomeResist[resistDominante[0]]} (${resistDominante[0]}) em ${resistDominante[1]} check-ins`,
+                    interpretacao: 'Defesa estrutural ativa - trabalhar FUNÇÃO da resistência, não apenas eliminar'
+                });
+            }
+
+            const flowCount = checkins.filter(c => c.enp === 'Z5').length;
+            const compensCount = checkins.filter(c => c.enp === 'Z2').length;
+
+            if (flowCount > 0 && compensCount > 0) {
+                trends.padroes.push({
+                    tipo: 'OSCILAÇÃO SELF',
+                    mensagem: `${flowCount} check-ins em Flow vs ${compensCount} em Compensação`,
+                    interpretacao: 'Conflito entre self autêntico e falso self. Identificar gatilhos de compensação.'
+                });
+            }
+
+            return trends;
+        }
+
+        function mostrarResultado(perfil, trends) {
+            document.getElementById('diagnostico').classList.add('hidden');
+            document.getElementById('resultado').classList.remove('hidden');
+            
+            document.getElementById('perfil-display').textContent = perfil.nome;
+            document.getElementById('perfil-display').style.background = perfil.cor;
+            document.getElementById('perfil-descricao').textContent = perfil.descricao;
+            
+            let scoreHTML = '<h4 style="color: var(--orange); margin-bottom: 12px;"><i class="fas fa-calculator"></i> Análise de Scoring</h4>';
+            scoreHTML += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">';
+            
+            checkinData.scores.slice(0, 5).forEach(s => {
+                const barWidth = s.percentual;
+                scoreHTML += `
+                    <div style="background: white; padding: 12px; border-radius: 6px;">
+                        <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 5px;">${s.nome.substring(0, 30)}...</div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="flex: 1; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+                                <div style="width: ${barWidth}%; height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width 0.5s;"></div>
+                            </div>
+                            <div style="font-size: 14px; font-weight: 700; color: var(--gold);">${s.percentual}%</div>
+                        </div>
+                    </div>
+                `;
+            });
+            scoreHTML += '</div>';
+            document.getElementById('score-breakdown').innerHTML = scoreHTML;
+            
+            const dimensoesHTML = `
+                <div class="diagnostico-item">
+                    <div class="diagnostico-label">Foco Energético</div>
+                    <div class="diagnostico-valor">${checkinData.fep}</div>
+                </div>
+                <div class="diagnostico-item">
+                    <div class="diagnostico-label">Qualidade Energia</div>
+                    <div class="diagnostico-valor">${checkinData.qe}</div>
+                </div>
+                <div class="diagnostico-item">
+                    <div class="diagnostico-label">Resistência Ativa</div>
+                    <div class="diagnostico-valor">${checkinData.ra}</div>
+                </div>
+                <div class="diagnostico-item">
+                    <div class="diagnostico-label">Impulso Dominante</div>
+                    <div class="diagnostico-valor">${checkinData.id}</div>
+                </div>
+                <div class="diagnostico-item">
+                    <div class="diagnostico-label">Estado Neuropsic.</div>
+                    <div class="diagnostico-valor">${checkinData.enp}</div>
+                </div>
+                <div class="diagnostico-item">
+                    <div class="diagnostico-label">Corpo/Mente/Atenção</div>
+                    <div class="diagnostico-valor">${checkinData.corpo}/${checkinData.mente}/${checkinData.atencao}</div>
+                </div>
+            `;
+            document.getElementById('dimensoes-display').innerHTML = dimensoesHTML;
+            
+            const analiseUL = checkinData.analiseTextual;
+            if (Object.keys(analiseUL.categorias).length > 0) {
+                let ulHTML = '<div class="trend-card">';
+                ulHTML += '<h4><i class="fas fa-text-height"></i> Análise Textual da Urgência Libidinal</h4>';
+                ulHTML += `<p style="font-style: italic; margin-bottom: 15px;">"${checkinData.ul}"</p>`;
+                ulHTML += '<div style="display: flex; gap: 10px; flex-wrap: wrap;">';
+                
+                for (const [cat, count] of Object.entries(analiseUL.categorias)) {
+                    ulHTML += `<div style="background: white; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;">
+                        ${cat.toUpperCase()} (${count})
+                    </div>`;
+                }
+                
+                ulHTML += '</div>';
+                ulHTML += `<p style="margin-top: 15px; font-size: 14px;">
+                    <strong>Intensidade:</strong> ${analiseUL.intensidade}/5 | 
+                    <strong>Especificidade:</strong> ${analiseUL.especificidade}/5
+                </p>`;
+                ulHTML += '</div>';
+                document.getElementById('analise-ul-container').innerHTML = ulHTML;
+            }
+            
+            if (checkinData.integracaoSage.disponivel) {
+                const sage = checkinData.integracaoSage;
+                let sageHTML = '<div class="trend-card">';
+                sageHTML += '<h4><i class="fas fa-brain"></i> Integração com SAGE 90</h4>';
+                sageHTML += `<p style="margin-bottom: 15px;">
+                    <strong>IFE:</strong> ${sage.ife?.toFixed(2) || '--'} | 
+                    <strong>IDS:</strong> ${sage.ids || '--'} | 
+                    <strong>IIE:</strong> ${sage.iie?.toFixed(2) || '--'} | 
+                    <strong>ICA:</strong> ${sage.ica?.toFixed(2) || '--'} | 
+                    <strong>GAF:</strong> ${sage.gaf || '--'}
+                </p>`;
+                
+                if (sage.insights.length > 0) {
+                    sageHTML += '<div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid var(--red);">';
+                    sage.insights.forEach(insight => {
+                        sageHTML += `<div style="margin-bottom: 10px;">
+                            <strong style="color: var(--red);">⚠️ ${insight.tipo}:</strong><br>
+                            ${insight.mensagem}
+                        </div>`;
+                    });
+                    sageHTML += '</div>';
+                }
+                
+                sageHTML += '</div>';
+                document.getElementById('integracao-sage-container').innerHTML = sageHTML;
+            }
+            
+            if (trends.disponivel && trends.padroes.length > 0) {
+                let trendsHTML = '<div class="trend-card">';
+                trendsHTML += `<h4><i class="fas fa-chart-line"></i> Padrões Históricos (${trends.total} check-ins)</h4>`;
+                
+                trends.padroes.forEach(padrao => {
+                    trendsHTML += `<div style="background: white; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 3px solid var(--blue);">
+                        <div style="font-weight: 600; color: var(--navy); margin-bottom: 8px;">${padrao.tipo}</div>
+                        <div style="font-size: 14px; margin-bottom: 5px;">${padrao.mensagem}</div>
+                        <div style="font-size: 13px; color: #7f8c8d; font-style: italic;">${padrao.interpretacao}</div>
+                    </div>`;
+                });
+                
+                trendsHTML += '</div>';
+                document.getElementById('trends-container').innerHTML = trendsHTML;
+            }
+            
+            document.getElementById('recomendacoes-container').innerHTML = `
+                <div class="recomendacao-box">
+                    <h4><i class="fas fa-lightbulb"></i> Recomendação Clínica</h4>
+                    <p style="line-height: 1.8; margin: 0;">${perfil.recomendacao}</p>
+                    ${perfil.forcas ? `
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
+                            <strong style="color: #155724;">✅ Pontos de Força:</strong>
+                            <ul style="margin: 8px 0 0 20px;">
+                                ${perfil.forcas.map(f => `<li>${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            if (perfil.alerta) {
+                document.getElementById('alertas-container').innerHTML = `
+                    <div class="alert-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Alerta Clínico</h4>
+                        <p style="line-height: 1.8; margin: 0;">${perfil.alerta}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function exportarJSON() {
+            const dataStr = JSON.stringify(checkinData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `checkin-libidinal-v2-enhanced-${checkinData.timestamp}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            mostrarNotificacao('📥 JSON exportado!');
+        }
+
+        function novoCheckin() {
+            if (confirm('Iniciar novo check-in? Dados atuais serão perdidos se não exportados.')) {
+                location.reload();
+            }
+        }
+
+        function mostrarNotificacao(msg) {
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--gold);
+                color: var(--navy);
+                padding: 18px 28px;
+                border-radius: 10px;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: var(--shadow);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notif.textContent = msg;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+                    
